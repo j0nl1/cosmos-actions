@@ -4,15 +4,22 @@
   "description": "TBD",
   "license": "MIT",
   "scripts": {
+    "x": "pnpm tsx playground/index.ts",
     "dev": "pnpm tsup --watch",
     "lint": "pnpm biome check --write src",
     "lint:fix": "pnpm biome ci ./src",
     "build": "pnpm tsup --clean"
   },
   "dependencies": {
+    "cosmes-types": "^0.1.4"
+  },
+  "devDependencies": {
     "@biomejs/biome": "^1.9.2",
     "tsup": "^8.3.0",
+    "tsx": "^4.19.1",
     "typescript": "^5.6.2"
   },
-  "contributors": ["j0nl1 <javieragv@protonmail.com>"]
+  "contributors": [
+    "j0nl1 <javieragv@protonmail.com>"
+  ]
 }
