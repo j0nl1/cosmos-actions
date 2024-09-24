@@ -5,6 +5,7 @@ import {
 } from "cosmes-types";
 
 import type { Chain, Client, Prettify, Signer, Transport } from "@leftcurve/types";
+import { queryAbci } from "~/actions/base/queryAbci";
 
 export type GetAllBalancesParameters = Prettify<
   Omit<CosmosBankV1beta1QueryAllBalancesRequest, "$unknown" | "$typeName"> & {
@@ -31,12 +32,12 @@ export async function getAllBalances<
   const { height = 0, ...query } = parameters;
   const { method, typeName, request, response } = CosmosBankV1beta1QueryAllBalancesService;
 
-  const result = await client.query(
-    `/${typeName}/${method}`,
-    request.toBinary(query),
+  const { value } = await queryAbci(client, {
+    path: `/${typeName}/${method}`,
+    data: request.toBinary(query),
     height,
-    false,
-  );
+    prove: false,
+  });
 
-  return response.fromBinary(result.value);
+  return response.fromBinary(value);
 }
